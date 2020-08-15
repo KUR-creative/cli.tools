@@ -31,7 +31,7 @@ def move(src, dst, rep='_'):
     srcpaths = descendants(src)
     for srcpath in srcpaths:
         p = Path(srcpath)
-        dstname = str(p.relative_to(p.parts[0]))
+        dstname = str(p.relative_to(*Path(src).parts))
         dstpath = Path(
             dst, dstname.replace(rep, '').replace(os.sep, rep))
         print(srcpath, '=>', dstpath)
@@ -40,7 +40,7 @@ def move(src, dst, rep='_'):
     if ret == 'y':
         for srcpath in srcpaths:
             p = Path(srcpath)
-            dstname = str(p.relative_to(p.parts[0]))
+            dstname = str(p.relative_to(*Path(src).parts))
             dstpath = Path(
                 dst, dstname.replace(rep, '').replace(os.sep, rep))
             p.rename(dstpath)
